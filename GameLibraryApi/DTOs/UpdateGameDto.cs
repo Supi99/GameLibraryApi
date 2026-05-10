@@ -8,6 +8,7 @@ namespace GameLibraryApi.DTOs
         [MaxLength(200)]
         public string Title { get; set; } = string.Empty;
 
+        [MaxLength(2000, ErrorMessage = "Description cannot exceed 2000 characters")]
         public string Description { get; set; } = string.Empty;
 
         [MaxLength(100)]
