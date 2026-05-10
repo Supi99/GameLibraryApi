@@ -1,4 +1,5 @@
 using GameLibraryApi.Data;
+using GameLibraryApi.Middleware;
 using GameLibraryApi.Repositories;
 using GameLibraryApi.Repositories.Interfaces;
 using GameLibraryApi.Services;
@@ -14,6 +15,9 @@ builder.Services.AddDbContext<AppDbContext>(
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
+builder.Services.AddProblemDetails();
+
 builder.Services.AddScoped<IGamesRepository, GamesRepository>();
 builder.Services.AddScoped<IGamesService, GamesService>();
 
@@ -28,5 +32,6 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
+app.UseExceptionHandler();
 
 app.Run();
